@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="es" data-theme="obsidian">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#0b0d12">
+  <meta name="description" content="Numeria 404 V2 — numerología pitagórica y caldea separadas, ciclos, calendario y perfil bioenergético simbólico.">
+  <title>Numeria 404 V2.2.0</title>
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" href="./assets/icons/icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./css/app.v2.2.0.css">
+</head>
+<body>
+  <div id="startupGuard" class="startup-guard" role="status" aria-live="polite">Iniciando motor de Numeria 404…</div>
+  <noscript><div class="startup-guard" data-state="error">Numeria 404 necesita JavaScript activado para funcionar.</div></noscript>
+  <div class="bg-orb orb-a"></div><div class="bg-orb orb-b"></div><div class="noise"></div>
+
+  <header class="topbar">
+    <a class="brand" href="#inicio" aria-label="Numeria 404"><span class="brand-mark">N</span><span><strong>NUMERIA</strong><small>404 · V2.2.0</small></span></a>
+    <nav class="nav" aria-label="Navegación principal">
+      <button type="button" class="nav-btn active" data-view="inicio" aria-current="page">Perfil</button>
+      <button type="button" class="nav-btn" data-view="calendario">Calendario</button>
+      <button type="button" class="nav-btn" data-view="caldea">Caldea</button>
+      <button type="button" class="nav-btn" data-view="compatibilidad">Pareja</button>
+      <button type="button" class="nav-btn" data-view="guardados">Guardados</button>
+      <button type="button" class="nav-btn" data-view="ajustes">Ajustes</button>
+    </nav>
+    <div class="top-actions"><button type="button" id="installBtn" class="icon-btn hidden" title="Instalar app" aria-label="Instalar Numeria 404">＋</button><button type="button" id="themeCycle" class="icon-btn" title="Cambiar tema" aria-label="Cambiar tema visual">◐</button></div>
+  </header>
+  <div id="appStatus" class="app-status" role="status" aria-live="polite" aria-atomic="true"></div>
+
+  <main class="shell">
+    <section id="view-inicio" class="view active">
+      <div class="hero">
+        <div><p class="eyebrow">PITAGÓRICA · CICLOS · CARTA VISUAL · BIOENERGÍA SIMBÓLICA</p>
+          <h1>Tu mapa numérico,<br><em>ahora con más profundidad.</em></h1>
+          <p class="hero-copy">Motor pitagórico trazable, carta numerológica visual, ciclos, matriz, lectura simbólica y exportación de informe. Todo se calcula localmente.</p>
+        </div>
+        <div class="hero-badge" aria-hidden="true"><div class="rings"><span>1</span><span>4</span><span>7</span><span>2</span><span>5</span><span>8</span><span>3</span><span>6</span><span>9</span></div></div>
+      </div>
+
+      <section class="panel input-panel">
+        <div class="panel-title"><div><span class="kicker">01 / DATOS</span><h2>Crear perfil pitagórico</h2></div><span class="privacy-pill">LOCAL · PRIVADO</span></div>
+        <form id="profileForm" class="form-grid">
+          <label class="field field-wide"><span>Nombre completo</span><input id="fullName" type="text" maxlength="120" autocomplete="name" placeholder="Ej. Ada Lovelace" required></label>
+          <label class="field"><span>Fecha de nacimiento</span><input id="birthDate" type="date" required></label>
+          <label class="field"><span>Alias <small>(opcional)</small></span><input id="profileAlias" type="text" maxlength="80" placeholder="Ej. Perfil personal"></label>
+          <div class="form-actions field-wide"><button class="btn primary" type="submit">CALCULAR PERFIL <span>→</span></button><button id="demoBtn" class="btn ghost" type="button">Cargar ejemplo</button></div>
+        </form>
+      </section>
+
+      <section id="results" class="results hidden">
+        <div class="results-header">
+          <div><span class="kicker">02 / RESULTADOS</span><h2 id="resultName">Perfil</h2><p id="resultMeta"></p></div>
+          <div class="results-actions">
+            <button type="button" id="saveProfileBtn" class="btn ghost">Guardar</button>
+            <button type="button" id="reportBtn" class="btn ghost">Informe HTML</button>
+            <button type="button" id="printBtn" class="btn ghost">Imprimir / PDF</button>
+            <button type="button" id="exportBtn" class="btn ghost">JSON</button>
+          </div>
+        </div>
+
+        <div class="number-hero card reveal-card">
+          <div><span class="label">CAMINO DE VIDA</span><strong id="lifePath" class="mega-number">–</strong><span id="lifePathTitle" class="number-title">–</span></div>
+          <div class="hero-interpretation"><p id="lifePathText"></p><button type="button" class="text-btn explain-btn" data-key="lifePath">Ver cálculo →</button></div>
+        </div>
+
+        <div class="metric-grid">
+          <article class="metric card reveal-card"><span class="label">DESTINO / EXPRESIÓN</span><strong id="expressionNumber">–</strong><span id="expressionTitle"></span><button type="button" class="text-btn explain-btn" data-key="expression">Cálculo</button></article>
+          <article class="metric card reveal-card"><span class="label">ALMA</span><strong id="soulNumber">–</strong><span id="soulTitle"></span><button type="button" class="text-btn explain-btn" data-key="soul">Cálculo</button></article>
+          <article class="metric card reveal-card"><span class="label">PERSONALIDAD</span><strong id="personalityNumber">–</strong><span id="personalityTitle"></span><button type="button" class="text-btn explain-btn" data-key="personality">Cálculo</button></article>
+          <article class="metric card reveal-card"><span class="label">MADUREZ</span><strong id="maturityNumber">–</strong><span id="maturityTitle"></span><button type="button" class="text-btn explain-btn" data-key="maturity">Cálculo</button></article>
+        </div>
+
+        <div class="dashboard-grid chart-dashboard">
+          <article class="card section-card">
+            <div class="card-head"><div><span class="kicker">CARTA VISUAL</span><h3>Mapa de números núcleo</h3></div><span class="subtle">SVG · interactivo</span></div>
+            <div id="visualChart" class="visual-chart"></div>
+            <div id="chartLegend" class="chart-legend"></div>
+          </article>
+          <article class="card section-card">
+            <div class="card-head"><div><span class="kicker">MATRIZ</span><h3>Frecuencia 1–9</h3></div><span class="subtle">Nombre + fecha</span></div>
+            <div id="matrixGrid" class="matrix-grid"></div>
+          </article>
+        </div>
+
+        <div class="dashboard-grid">
+          <article class="card section-card"><div class="card-head"><div><span class="kicker">BIOENERGÍA</span><h3>Mapa simbólico</h3></div><span class="subtle">No clínico</span></div><div id="energyBars" class="energy-bars"></div></article>
+          <article class="card section-card"><div class="card-head"><div><span class="kicker">NÚCLEO AMPLIADO</span><h3>Números complementarios</h3></div></div><div id="secondaryNumbers" class="secondary-grid"></div></article>
+        </div>
+
+        <article class="card section-card"><div class="card-head"><div><span class="kicker">CICLOS</span><h3>Pináculos y desafíos</h3></div><span id="currentPersonalYear" class="personal-year"></span></div><div id="timeline" class="timeline"></div></article>
+
+        <article class="card section-card"><div class="card-head"><div><span class="kicker">LECTURA</span><h3>Mapa personal</h3></div><span class="subtle">Interpretación orientativa</span></div><div id="readingGrid" class="reading-grid"></div></article>
+
+        <div class="notice"><strong>Nota importante</strong><p>La numerología y las correspondencias bioenergéticas de esta app son sistemas simbólicos e interpretativos. No constituyen diagnóstico, tratamiento médico, asesoramiento psicológico ni evidencia científica sobre la salud.</p></div>
+      </section>
+    </section>
+
+    <section id="view-calendario" class="view">
+      <div class="page-head"><span class="kicker">2026 → 2030</span><h1>Calendario numerológico</h1><p>Calcula el Año Personal y los doce Meses Personales de cada año. Usa el perfil actual o introduce una fecha.</p></div>
+      <section class="panel calendar-form-panel">
+        <form id="calendarForm" class="calendar-form">
+          <label class="field"><span>Fecha de nacimiento</span><input id="calendarBirthDate" type="date" required></label>
+          <button class="btn primary" type="submit">GENERAR 2026–2030</button>
+        </form>
+      </section>
+      <div id="calendarResult" class="year-stack"></div>
+    </section>
+
+    <section id="view-caldea" class="view">
+      <div class="page-head"><span class="kicker">SISTEMA INDEPENDIENTE</span><h1>Numerología caldea</h1><p>Se calcula con su propia tabla de letras. No se fusiona con el resultado pitagórico.</p></div>
+      <section class="panel">
+        <form id="chaldeanForm" class="calendar-form">
+          <label class="field"><span>Nombre completo</span><input id="chaldeanName" type="text" maxlength="120" required placeholder="Ej. Ada Lovelace"></label>
+          <button class="btn primary" type="submit">CALCULAR CALDEA</button>
+        </form>
+      </section>
+      <section id="chaldeanResult" class="hidden"></section>
+    </section>
+
+    <section id="view-compatibilidad" class="view">
+      <div class="page-head"><span class="kicker">MODO PAREJA</span><h1>Compatibilidad avanzada</h1><p>Cinco dimensiones, tres capas relacionales y números combinados de pareja. Es una lectura simbólica, no una predicción.</p></div>
+      <section class="panel">
+        <form id="compatForm" class="compare-grid">
+          <div class="person-form"><span class="person-tag">A</span><label class="field"><span>Nombre</span><input id="nameA" maxlength="120" required placeholder="Persona A"></label><label class="field"><span>Fecha</span><input id="dateA" type="date" required></label></div>
+          <div class="versus">×</div>
+          <div class="person-form"><span class="person-tag">B</span><label class="field"><span>Nombre</span><input id="nameB" maxlength="120" required placeholder="Persona B"></label><label class="field"><span>Fecha</span><input id="dateB" type="date" required></label></div>
+          <button class="btn primary compare-submit" type="submit">ANALIZAR PAREJA <span>→</span></button>
+        </form>
+      </section>
+      <section id="compatResult" class="hidden"></section>
+    </section>
+
+    <section id="view-guardados" class="view">
+      <div class="page-head"><span class="kicker">BIBLIOTECA LOCAL</span><h1>Perfiles guardados</h1><p>Se almacenan únicamente en este navegador mediante localStorage.</p></div>
+      <div id="savedProfiles" class="saved-grid"></div>
+    </section>
+
+    <section id="view-ajustes" class="view">
+      <div class="page-head"><span class="kicker">PERSONALIZACIÓN</span><h1>Ajustes</h1><p>Cambia el aspecto y gestiona los datos locales.</p></div>
+      <div class="settings-grid">
+        <article class="card section-card"><div class="card-head"><div><span class="kicker">SKINS</span><h3>Tema visual</h3></div></div><div id="themeGrid" class="theme-grid"></div></article>
+        <article class="card section-card"><div class="card-head"><div><span class="kicker">DATOS</span><h3>Privacidad local</h3></div></div><p class="settings-copy">Numeria 404 no necesita servidor. Los perfiles guardados permanecen en el almacenamiento local de tu navegador.</p><div class="settings-actions"><button type="button" id="exportLibraryBtn" class="btn ghost">Exportar biblioteca JSON</button><button type="button" id="clearDataBtn" class="btn danger">Borrar todos los perfiles</button></div></article>
+      </div>
+    </section>
+  </main>
+
+  <dialog id="explainDialog" class="modal"><button type="button" id="closeDialog" class="modal-close" aria-label="Cerrar">×</button><span class="kicker">TRAZABILIDAD</span><h2 id="dialogTitle">Cálculo</h2><div id="dialogBody"></div></dialog>
+
+  <footer class="footer"><span>NUMERIA 404 · v2.2.0</span><span>PITAGÓRICA + CALDEA · PWA · OFFLINE</span></footer>
+  <script>
+    window.__NUMERIA_BOOTED__=false;
+    window.__NUMERIA_RUNTIME_ERROR__="";
+    window.addEventListener("error",function(event){
+      window.__NUMERIA_RUNTIME_ERROR__=event.message||"Error al cargar JavaScript";
+    });
+    window.setTimeout(function(){
+      if(!window.__NUMERIA_BOOTED__){
+        var guard=document.getElementById("startupGuard");
+        if(guard){guard.classList.remove("hidden");guard.dataset.state="error";guard.textContent="El motor JavaScript no ha arrancado. Recarga la página o limpia la caché de este sitio.";}
+      }
+    },1800);
+  </script>
+  <script defer src="./js/numeria.runtime.v2.2.0.js"></script>
+</body>
+</html>
